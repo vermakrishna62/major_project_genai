@@ -1,0 +1,26 @@
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore conda environment directories
+/env/
+/venv/
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore environment-specific files
+.env
+
+# Ignore Python virtual environment
+/.vscode/
+
+# Ignore log files and temporary files
+*.log
+*.tmp
+*.bak
+
+# Ignore IDE-specific files
+.vscode/
+*.code-workspace
