@@ -179,9 +179,9 @@ def show_invoice_extractor():
     if submit:
         image_data = input_image_setup(uploaded_file)
         input_prompt = """
-                    You are an expert in understanding invoices.
-                    You will receive input images as invoices &
-                    you will have to answer questions based on the input image
+                   You are an expert in analyzing images.
+        You will receive input images containing various types of information,
+        and you will have to extract relevant details or answer questions based on the content of the image.
                     """
         response = get_gemini_response(input_prompt, image_data, input_prompt)
         st.subheader("The Response is")
