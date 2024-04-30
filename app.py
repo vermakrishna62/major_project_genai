@@ -249,7 +249,7 @@ def show_health_app():
 # =================================================================================
 # Select the application
 # =================================================================================
-selected_application = st.selectbox("Select an application", ["Multi Language Invoice Extractor", "YouTube Transcribe Summarizer", "ATS Resume Scan", "Health App"])
+selected_application = st.selectbox("Select an application", ["YouTube Transcribe Summarizer", "ATS Resume Scan", "Health App","Multi Language Invoice Extractor"])
 
 # Show the content based on the selected application
 if selected_application == "Multi Language Invoice Extractor":
