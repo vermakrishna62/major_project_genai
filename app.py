@@ -68,27 +68,6 @@ def show_youtube_transcribe_summarizer():
 
 ## Function to load OpenAI model and get respones
 
-def get_gemini_response(input,image,prompt):
-    model = genai.GenerativeModel('gemini-pro-vision')
-    response = model.generate_content([input,image[0],prompt])
-    return response.text
-    
-
-def input_image_setup(uploaded_file):
-    # Check if a file has been uploaded
-    if uploaded_file is not None:
-        # Read the file into bytes
-        bytes_data = uploaded_file.getvalue()
-
-        image_parts = [
-            {
-                "mime_type": uploaded_file.type,  # Get the mime type of the uploaded file
-                "data": bytes_data
-            }
-        ]
-        return image_parts
-    else:
-        raise FileNotFoundError("No file uploaded")
 
 # ===================================================================================
 # ATS Resume Scan code
@@ -159,16 +138,39 @@ def show_ats_resume_scan():
 
 ##initialize our streamlit app
 
-st.set_page_config(page_title="Gemini AI Toolkit")
+st.set_page_config(page_title="Gemini Image Demo")
 
 # =============================================================
 # Invoice Extractor Code
 # =============================================================
 
+def get_gemini_response(input,image,prompt):
+    model = genai.GenerativeModel('gemini-pro-vision')
+    response = model.generate_content([input,image[0],prompt])
+    return response.text
+    
+
+def input_image_setup(uploaded_file):
+    # Check if a file has been uploaded
+    if uploaded_file is not None:
+        # Read the file into bytes
+        bytes_data = uploaded_file.getvalue()
+
+        image_parts = [
+            {
+                "mime_type": uploaded_file.type,  # Get the mime type of the uploaded file
+                "data": bytes_data
+            }
+        ]
+        return image_parts
+    else:
+        raise FileNotFoundError("No file uploaded")
+
+
 # Define the content of the "Multi Language Invoice Extractor" section
 def show_invoice_extractor():
     st.header("Multi Language Invoice Extractor Application")
-    input_prompt = st.text_input("Input Prompt: ", key="input")
+    input_data = st.text_input("Input Prompt: ", key="input")
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
     if uploaded_file is not None:
@@ -180,10 +182,10 @@ def show_invoice_extractor():
         image_data = input_image_setup(uploaded_file)
         input_prompt = """
                     You are an expert in understanding invoices.
-                    You will receive input images as invoices &
-                    you will have to answer questions based on the input image
+                    We will upload an image as invoice and 
+                    you will have to answer questions based on the uploaded invoice image
                     """
-        response = get_gemini_response(input_prompt, image_data, input_prompt)
+        response = get_gemini_response(input_prompt, image_data, input_data)
         st.subheader("The Response is")
         st.write(response)
         
@@ -216,7 +218,7 @@ def input_image_setup_img(uploaded_file):
 
 # Function to display the Health App
 def show_health_app():
-    st.header("Nutri Scan")
+    st.header("Health App")
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
     image = ""   
     if uploaded_file is not None:
@@ -249,7 +251,7 @@ def show_health_app():
 # =================================================================================
 # Select the application
 # =================================================================================
-selected_application = st.selectbox("Select an application", ["YouTube Transcribe Summarizer", "ATS Resume Scan", "Health App","Multi Language Invoice Extractor"])
+selected_application = st.selectbox("Select an application", ["Multi Language Invoice Extractor", "YouTube Transcribe Summarizer", "ATS Resume Scan", "Health App"])
 
 # Show the content based on the selected application
 if selected_application == "Multi Language Invoice Extractor":
