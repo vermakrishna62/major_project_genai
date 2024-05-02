@@ -138,7 +138,7 @@ def show_ats_resume_scan():
 
 ##initialize our streamlit app
 
-st.set_page_config(page_title="Gemini Image Demo")
+st.set_page_config(page_title="Gemini AI Toolkit")
 
 # =============================================================
 # Invoice Extractor Code
@@ -218,7 +218,7 @@ def input_image_setup_img(uploaded_file):
 
 # Function to display the Health App
 def show_health_app():
-    st.header("Health App")
+    st.header("Nutri Scan")
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
     image = ""   
     if uploaded_file is not None:
